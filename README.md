@@ -28,16 +28,21 @@ Since your local MySQL won't work online, you need a cloud database.
     *   Password
     *   Database Name
 
-#### Step 2: Deploy App to Render.com
+#### Step 2: Deploy App to Render.com (Automated)
+
+We will use a **Render Blueprint** (`render.yaml`) to automate the setup.
+
 1.  Sign up at [Render.com](https://render.com).
-2.  Click **New +** -> **Web Service**.
+2.  Click **New +** -> **Blueprint**.
 3.  Connect your GitHub and select this repository (`Student-Management-System`).
-4.  Render will verify the `Dockerfile`. Click **Deploy Web Service**.
-5.  **Important:** Scroll down to **Environment Variables** and add these:
-    *   `SPRING_DATASOURCE_URL`: `jdbc:mysql://<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?createDatabaseIfNotExist=true&useSSL=true`
-    *   `SPRING_DATASOURCE_USERNAME`: `<YOUR_DB_USERNAME>`
-    *   `SPRING_DATASOURCE_PASSWORD`: `<YOUR_DB_PASSWORD>`
-6.  Click **Save Changes**. Render will deploy your app, and you will get a public URL (e.g., `https://student-system.onrender.com`).
+4.  Render will find the `render.yaml` file.
+5.  Click **Apply**.
+6.  It will ask you for the **Environment Variables** (the database details you got in Step 1):
+    *   `SPRING_DATASOURCE_URL`
+    *   `SPRING_DATASOURCE_USERNAME`
+    *   `SPRING_DATASOURCE_PASSWORD`
+7.  Click **Approve**. Render will deploy your app automatically.
+
 
 ---
 
