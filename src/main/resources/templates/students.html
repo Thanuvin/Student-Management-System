@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Student Management System</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-actions">
+            <h1>Student Management System</h1>
+            <div>
+                <a href="/students/export/excel" class="btn"
+                    style="background-color: #10b981; color: white; margin-right: 10px;">Export to Excel</a>
+                <a href="/students/new" class="btn btn-primary">Add New Student</a>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>GPA</th>
+                        <th>Department</th>
+                        <th>Year</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${students}">
+                        <td th:text="${student.id}">1</td>
+                        <td th:text="${student.name}">John Doe</td>
+                        <td th:text="${student.gpa}">3.5</td>
+                        <td th:text="${student.department}">CS</td>
+                        <td th:text="${student.year}">Third</td>
+                        <td>
+                            <a th:href="@{/students/edit/{id}(id=${student.id})}"
+                                style="color: #818cf8; text-decoration: none; margin-right: 10px; font-weight: 500;">Edit</a>
+                            <a th:href="@{/students/delete/{id}(id=${student.id})}"
+                                style="color: #ef4444; text-decoration: none; font-weight: 500;"
+                                onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(students)}">
+                        <td colspan="6" style="text-align: center; color: var(--text-muted);">No students found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
