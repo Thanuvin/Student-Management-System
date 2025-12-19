@@ -13,12 +13,31 @@ docker-compose up --build
 ```
 The application will be available at: `http://localhost:8081`
 
-### Option 2: Deploy to Cloud (Free Tier)
-1.  **Push** this code to a GitHub repository.
-2.  **Sign up** for a cloud provider (e.g., [Render](https://render.com)).
-3.  **Create a New Web Service** and connect your repository.
-4.  Render will automatically detect the `Dockerfile` and build it.
-    *   *Note: You will also need a MySQL database. Render offers managed PostgreSQL (similar) or you can set up a MySQL instance at [Clever Cloud](https://www.clever-cloud.com/) (free tier)*.
+### Option 2: Deploy to Cloud (Free Way)
+
+To make it accessible to everyone, you need two things: **Hosting** (for the Java App) and a **Database** (for the data).
+
+#### Step 1: Get a Free MySQL Database
+Since your local MySQL won't work online, you need a cloud database.
+1.  Sign up for [TiDB Cloud](https://tidbcloud.com/) or [Aiven](https://aiven.io/) (both offer free MySQL-compatible tiers).
+2.  Create a cluster/service.
+3.  **Copy** these details from their dashboard:
+    *   Host (e.g., `gateway01.region.tidbcloud.com`)
+    *   Port (e.g., `4000` or `3306`)
+    *   Username
+    *   Password
+    *   Database Name
+
+#### Step 2: Deploy App to Render.com
+1.  Sign up at [Render.com](https://render.com).
+2.  Click **New +** -> **Web Service**.
+3.  Connect your GitHub and select this repository (`Student-Management-System`).
+4.  Render will verify the `Dockerfile`. Click **Deploy Web Service**.
+5.  **Important:** Scroll down to **Environment Variables** and add these:
+    *   `SPRING_DATASOURCE_URL`: `jdbc:mysql://<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?createDatabaseIfNotExist=true&useSSL=true`
+    *   `SPRING_DATASOURCE_USERNAME`: `<YOUR_DB_USERNAME>`
+    *   `SPRING_DATASOURCE_PASSWORD`: `<YOUR_DB_PASSWORD>`
+6.  Click **Save Changes**. Render will deploy your app, and you will get a public URL (e.g., `https://student-system.onrender.com`).
 
 ---
 
