@@ -43,6 +43,18 @@ We will use a **Render Blueprint** (`render.yaml`) to automate the setup.
     *   `SPRING_DATASOURCE_PASSWORD`
 7.  Click **Approve**. Render will deploy your app automatically.
 
+### Option 3: Deploy to Railway (Easiest for Database)
+
+**Railway** is likely the "best" option if you want the App and Database to be setup together without configuration headaches.
+
+1.  Sign up at [Railway.app](https://railway.app/).
+2.  Click **New Project** -> **Deploy from GitHub repo**.
+3.  Select this repository (`Student-Management-System`).
+4.  Once the App is added, click **New** (in the same project) -> **Database** -> **MySQL**.
+5.  Railway will create a MySQL service.
+6.  Click on your **Java App** service -> **Variables**.
+7.  Add the same variables (`SPRING_DATASOURCE_URL`, etc.) but use the *internal* values provided by the MySQL service (available in the MySQL service "Connect" tab).
+    *   *Tip: In Railway, you can often reference other services dynamically.*
 
 ---
 
